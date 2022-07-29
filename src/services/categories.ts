@@ -1,5 +1,8 @@
+import { HttpClient } from '../common/httpClient';
 import { Category } from '../common/interfaces';
 
+const categoryApi = '/categories';
+
 export const getCategories = (): Promise<Category[]> => {
-  return fetch(`${process.env.REACT_APP_API}/categories`).then((response) => (response.json() as unknown) as Category[]);
+  return HttpClient.get<Category[]>(categoryApi).then((response) => response.data);
 };

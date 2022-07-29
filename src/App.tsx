@@ -1,30 +1,25 @@
-import React, { useEffect, useState } from 'react';
-import { AppBar, Container, Toolbar, Typography } from '@mui/material';
-import { VideosTable } from './components/videos-table';
-import { getVideos } from './services/videos';
-import { ProcessedVideo } from './common/interfaces';
+import { Routes, Route, Outlet } from 'react-router-dom';
+import { routePaths } from './common/routePaths';
+import { VideoManager, VideoFormContainer } from './components/features';
+import { Layout } from './components/layout';
+import { ThemeProvider } from '@emotion/react';
+import { theme } from './common/theme';
 
-const App: React.FC = () => {
-  const [videos, setVideos] = useState<ProcessedVideo[]>([]);
-
-  useEffect(() => {
-    getVideos()
-      .then((videos) => {
-        setVideos(videos);
-      });
-  }, []);
-
+const App = () => {
   return (
-    <>
-      <AppBar position="static">
-        <Toolbar>
-          <Typography variant="h6">Videos</Typography>
-        </Toolbar>
-      </AppBar>
-      <Container>
-        <VideosTable videos={videos} />
-      </Container>
-    </>
+    <ThemeProvider theme={theme}>
+      <Layout>
+        <Routes>
+          <Route path={routePaths.HOME} element={<Outlet />}>
+            <Route index element={<VideoManager />} />
+            <Route path={routePaths.CREATE_VIDEO} element={<VideoFormContainer mode="new" />} />
+            <Route path={routePaths.EDIT_VIDEO} element={<VideoFormContainer mode="edit" />} />
+          </Route>
+          <Route path={routePaths.ABOUT_US} element={<div>About us</div>} />
+          <Route path={routePaths.FAQ} element={<div>FAQ</div>} />
+        </Routes>
+      </Layout>
+    </ThemeProvider>
   );
 };
 
