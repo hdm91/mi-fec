@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
-import { isFunction } from '../../utils/isWhat';
+import { isFunction } from '../../utils';
 
 interface AlertDialogProps {
   title?: string;

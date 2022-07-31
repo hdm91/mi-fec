@@ -1,5 +1,5 @@
 import { Routes, Route, Outlet } from 'react-router-dom';
-import { routePaths } from './common/routePaths';
+import { routePaths } from './constants';
 import { VideoManager, VideoFormContainer } from './components/features';
 import { Layout } from './components/layout';
 import { ThemeProvider } from '@emotion/react';
